@@ -85,7 +85,7 @@ static void MX_TIM7_Init(void);
   * @retval int
   */
 int main(void)
-{
+ 	{
   /* USER CODE BEGIN 1 */
 	int sample;
   /* USER CODE END 1 */
@@ -192,11 +192,12 @@ int main(void)
 			
 			case CHARACTCURVES:
 				ObtainCharactCurves(FrameBuffer);
+				//SensitivityAnalysis_Array(FrameBuffer);
 				Send_EndOfAction_FrameCalib(FrameBuffer);
 				break;
 			
 			case CALIB_ARRAY:
-				Calib_Array_Chem_STM(FrameBuffer);
+				Calib_Array_Chem_STM(FrameBuffer,1);
 				Send_EndOfAction_FrameCalib(FrameBuffer);
 				break;
 
@@ -254,7 +255,8 @@ int main(void)
 				break;*/
 			
 			case CHEM_NOISE:
-				ChemNoise(FrameBuffer);
+				//ChemNoise(FrameBuffer);
+				ChemNoise_Minutes(FrameBuffer, 10.0);
 				Send_EndOfAction_Pixel(FrameBuffer);
 				break;
 			
@@ -269,13 +271,27 @@ int main(void)
 				break;				
 			
 			case DAC_SENS:
-				DACSensitivityTest(FrameBuffer);
+				Extract_DACSensitivity(FrameBuffer);
 				Send_EndOfAction_FrameCalib(FrameBuffer);
 				break;	
 			
 			case UPDATE_CALIB:
 				UpdateCalib(FrameBuffer);
 				//Send_EndOfAction_UpdateCalib(FrameBuffer);
+				break;
+
+			case UPDATE_DACSENS:
+				Receive_DACSensitivity(FrameBuffer);
+				//Send_EndOfAction_UpdateCalib(FrameBuffer);
+				break;
+			
+			case COMPENSATE_SAMPLE:
+				CompensateAndSample(FrameBuffer);
+				break;
+			
+			case CHARACTCURVEPIXEL:
+				SensitivityAnalysis_Pixel(FrameBuffer);
+				Send_EndOfAction_Pixel(FrameBuffer);
 				break;
 			
 			default:

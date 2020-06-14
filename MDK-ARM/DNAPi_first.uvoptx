@@ -153,7 +153,7 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>TimerCh2</ItemText>
+          <ItemText>TimerCh2,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
@@ -183,7 +183,7 @@
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>FrameBuf</ItemText>
+          <ItemText>FrameBuf,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
@@ -198,17 +198,27 @@
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>STM_counter,0x0A</ItemText>
+          <ItemText>Code</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remainer_counter,0x0A</ItemText>
+          <ItemText>data_to_send</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Minutes_counter,0x0A</ItemText>
+          <ItemText>dac_value</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>instantDNA.DAC_RefElect_Voltage</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>data_to_send_2</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -225,7 +235,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
@@ -273,7 +283,7 @@
 
   <Group>
     <GroupName>Application/MDK-ARM</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -293,7 +303,7 @@
 
   <Group>
     <GroupName>Application/User</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

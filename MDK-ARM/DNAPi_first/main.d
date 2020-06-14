@@ -39,6 +39,6 @@ dnapi_first\main.o: ../Src/OneWireInterface/tm_stm32_onewire.h
 dnapi_first\main.o: ../Src/OneWireInterface/tm_stm32_delay.h
 dnapi_first\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 dnapi_first\main.o: ../Src/OneWireInterface/tm_stm32_gpio.h
+dnapi_first\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 dnapi_first\main.o: ../Src/PWMSampling.h
 dnapi_first\main.o: ../Src/instantDNA.h
-dnapi_first\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

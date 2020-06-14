@@ -25,12 +25,16 @@ extern TIM_HandleTypeDef htim9;
 struct TimerChannelParam {
 	__IO uint32_t TicksPeriod_Sample;
 	__IO uint32_t TicksHigh_Sample;
+	__IO float DutyCycle_Sample;
+	__IO float Frequency_Sample;
 	__IO uint32_t NumSamples;
 	
 	__IO char ActiveMeas;
 	__IO char SampleAvailable;
 	__IO char FirstIgnored;
 	__IO char NumIter;
+	
+	__IO char ValidSample;
 };
 
 volatile struct TimerChannelParam TimerCh2;
@@ -61,6 +65,8 @@ void AcquireData(){
 				TicksPeriod = HAL_TIM_ReadCapturedValue(&htim2, TIM_CHANNEL_2);
 
 				if (TicksHigh < TicksPeriod && TimerCh2.FirstIgnored) {
+					
+					// WINDOW SAMPLING
 					TimerCh2.TicksPeriod_Sample += TicksPeriod;
 					TimerCh2.TicksHigh_Sample += TicksHigh;
 					TimerCh2.NumSamples++;
@@ -76,13 +82,19 @@ void AcquireData(){
 void ProcessData(){
 	
 	if (TimerCh2.TicksPeriod_Sample == 0){
-				TimerCh2.TicksPeriod_Sample = 84000;
-				if(HAL_GPIO_ReadPin(PWM_GPIO_Port, PWM_Pin) == 0x01) TimerCh2.TicksHigh_Sample = TimerCh2.TicksPeriod_Sample;
-				else TimerCh2.TicksHigh_Sample = 0;
+		TimerCh2.Frequency_Sample = 1.0;
+		if(HAL_GPIO_ReadPin(PWM_GPIO_Port, PWM_Pin) == 0x01) {
+			TimerCh2.DutyCycle_Sample = (float)1.0;
+		}
+		else {
+			TimerCh2.DutyCycle_Sample = (float)0.0;
+		}
+		TimerCh2.ValidSample = 1;
 	}
 	else {
-		TimerCh2.TicksPeriod_Sample = TimerCh2.TicksPeriod_Sample / TimerCh2.NumSamples;
-		TimerCh2.TicksHigh_Sample = TimerCh2.TicksHigh_Sample / TimerCh2.NumSamples;		
+		TimerCh2.DutyCycle_Sample = (float)TimerCh2.TicksHigh_Sample / (float)TimerCh2.TicksPeriod_Sample;
+		TimerCh2.Frequency_Sample = (float)84000000.0 / ((float)TimerCh2.TicksPeriod_Sample / (float)TimerCh2.NumSamples);
+		if (TimerCh2.DutyCycle_Sample <= 1 & TimerCh2.DutyCycle_Sample >= 0) TimerCh2.ValidSample = 1;
 	}
 	
 }
